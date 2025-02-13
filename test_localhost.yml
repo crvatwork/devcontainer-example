@@ -1,0 +1,17 @@
+- name: Gather and print local facts
+  hosts: localhost
+  become: true
+  gather_facts: true
+  tasks:
+
+   - name: Print facts
+     ansible.builtin.debug:
+      var: ansible_facts
+
+   - name: Lazy get collection information
+     ansible.builtin.shell: ansible-galaxy collection list
+     register: result
+
+   - name: Print return information from the previous task
+     ansible.builtin.debug:
+       var: result
