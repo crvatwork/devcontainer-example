@@ -6,7 +6,9 @@
 
    - name: Print facts
      ansible.builtin.debug:
-      var: ansible_facts
+      msg:
+        - "Facts says hostname is: {{ ansible_facts.hostname }}"
+        - "Facts says the host distribution is: {{ ansible_facts.distribution }}"
 
    - name: Lazy get collection information
      ansible.builtin.shell: ansible-galaxy collection list
@@ -14,4 +16,4 @@
 
    - name: Print return information from the previous task
      ansible.builtin.debug:
-       var: result
+      var: result.stdout_lines[2:6]
